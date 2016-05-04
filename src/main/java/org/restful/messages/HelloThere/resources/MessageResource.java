@@ -24,7 +24,7 @@ import org.restful.messages.HelloThere.service.MessageService;
 
 @Path("/messages")
 @Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
+@Consumes(value = {MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
 public class MessageResource {
 
 	MessageService messageService = new MessageService();
