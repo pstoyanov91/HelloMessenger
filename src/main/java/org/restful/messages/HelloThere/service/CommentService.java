@@ -4,9 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.restful.messages.HelloThere.database.DatabaseClass;
 import org.restful.messages.HelloThere.model.Comment;
+import org.restful.messages.HelloThere.model.ErrorMessage;
 import org.restful.messages.HelloThere.model.Message;
 
 public class CommentService {
@@ -19,7 +23,18 @@ public class CommentService {
 	}
 	
 	public Comment getComment(long messageId, long commentId) {
+		ErrorMessage errorMessage = new ErrorMessage("Not found ", 404, "http://javabrains.io");
+		Response response = Response.status(Status.NOT_FOUND).entity(errorMessage).build();
+		
+		Message message = messages.get(messageId);
+		if(message == null){
+			throw new WebApplicationException(response);
+		}
 		Map<Long, Comment> comments = messages.get(messageId).getComments();
+		Comment comment = comments.get(commentId);
+		if(comment == null){
+			throw new WebApplicationException(response);
+		}
 		return comments.get(commentId);
 	}
 	

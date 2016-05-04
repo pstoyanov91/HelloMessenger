@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: cpt2pes
-Build-Jdk: 1.7.0_79
+Build-Jdk: 1.7.0_95
+Built-By: petar
 Created-By: Maven Integration for Eclipse
 
